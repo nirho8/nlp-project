@@ -1,6 +1,7 @@
 import 'package:final_project/widgets/http_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'dart:convert';
 import './tweet.dart';
 
@@ -9,7 +10,7 @@ class Tweets with ChangeNotifier {
   final token;
   final userId;
 
-  Tweets(this.token,this.userId, this._tweets);
+  Tweets(this.token, this.userId, this._tweets);
 
   List<Tweet> get tweets {
     return [..._tweets];
@@ -17,7 +18,8 @@ class Tweets with ChangeNotifier {
 
   Future<void> fetchAndSetTweets() async {
     print(userId);
-    final url = 'https://flutter-app-bcd43.firebaseio.com/tweets.json?auth=$token&orderBy="creator"&equalTo="$userId"';
+    final url =
+        'https://flutter-app-bcd43.firebaseio.com/tweets.json?auth=$token&orderBy="creator"&equalTo="$userId"';
     try {
       final response = await http.get(url);
       final extracteData = json.decode(response.body) as Map<String, dynamic>;
@@ -37,14 +39,26 @@ class Tweets with ChangeNotifier {
     }
   }
 
-  Future<void> addTweet(Tweet tweet) {
+  Future<void> addTweet(Tweet tweet) async {
+    final serverUrl = 'http://localhost:5000/tweet_prediction';
+    final serverAnswer = await http.post(serverUrl,
+        body: json.encode({
+          "tweet": tweet.description,
+          "time": DateFormat.jm().format(DateTime.now()),
+          "user": "Amit",
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        });
+    final likes = json.decode(serverAnswer.body)["like"];
     final noneUser = token != null ? '?auth=$token' : '';
     final url = 'https://flutter-app-bcd43.firebaseio.com/tweets.json$noneUser';
     return http
         .post(url,
             body: json.encode({
               "description": tweet.description,
-              "like": tweet.likes,
+              "like": likes,
               "date": tweet.date,
               "creator": userId,
             }))
@@ -63,16 +77,19 @@ class Tweets with ChangeNotifier {
   }
 
   Tweet deleteTweet(String id) {
-    final url = 'https://flutter-app-bcd43.firebaseio.com/tweets/$id.json/auth=$token';
+    final url =
+        'https://flutter-app-bcd43.firebaseio.com/tweets/$id.json/auth=$token';
     final tweetIndex = _tweets.indexWhere((element) => element.id == id);
     var tweet = _tweets[tweetIndex];
     _tweets.removeAt(tweetIndex);
     notifyListeners();
-    http.delete(url).then((response) => {
-      if(response.statusCode >= 400){
-        throw HttpException("Could not delete this tweet!")
-      }
-    }).catchError((_){
+    http
+        .delete(url)
+        .then((response) => {
+              if (response.statusCode >= 400)
+                {throw HttpException("Could not delete this tweet!")}
+            })
+        .catchError((_) {
       _tweets.insert(tweetIndex, tweet);
       notifyListeners();
     });
