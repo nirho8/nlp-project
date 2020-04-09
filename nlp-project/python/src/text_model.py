@@ -134,7 +134,6 @@ class TextModel(torch.nn.Module):
         self.n_layers = n_layers
 
         self.embedding = torch.nn.Embedding.from_pretrained(torch.FloatTensor(pre_trained_embedding), freeze=False)
-        # self.embedding = torch.nn.Embedding(input_size, embedding_size)
         self.lstm = torch.nn.LSTM(self.embedding_size, hidden_size, n_layers, dropout=dropout, bidirectional=True)
         self.out_layer = torch.nn.Linear(hidden_size * 2, out_size)
         self.attn = Attn(hidden_size)
