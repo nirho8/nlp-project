@@ -6,6 +6,6 @@ TRAIN_LSTM_DROPOUT = 0.5
 TEXT_HIDDEN_SIZE = 500
 TEXT_OUT_SIZE = 200  # TODO: is this the correct number?
 TEXT_EMBEDDING_SIZE = 200  # Should be the same as TEXT_EMBEDDING_PATH
-TEXT_EMBEDDING_PATH = "glove.twitter.27B.200d.txt"
+TEXT_EMBEDDING_PATH = "glove.twitter.27B.200d.txt"  # Use glove.twitter.27B.200d.txt from https://nlp.stanford.edu/projects/glove/
 TEXT_VOCAB_PATH = ""
 CUDA = False
