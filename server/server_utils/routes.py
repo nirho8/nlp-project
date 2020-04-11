@@ -42,21 +42,10 @@ def admin_management():
 @cross_origin()
 def tweet_prediction():
     print(request)
-    # tweet_details = CheckTweet()
-    # print(tweet_details)
     tweet = request.json["tweet"]
     time = request.json["time"]
     user = request.json["user"]
-    # model = Model("dummy model")
-    # model.prediction(tweet)
     return jsonify(
         like=5,
     )
-    # if tweet_details.validate_on_submit():
-    #     if True:
-    #         flash(model.prediction(tweet_details.account_name.data, tweet_details.tweet.data, tweet_details.time.data), 'success')
-    #
-    #         return redirect(url_for('home'))
-    #     else:
-    #         flash("wrong input", 'danger')
-    # return render_template('/tweet_prediction.html', title='tweet_prediction', tweet_details=tweet_details)
+    
