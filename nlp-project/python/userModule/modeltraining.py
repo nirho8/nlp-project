@@ -46,7 +46,7 @@ def train_embeddings_network(model, users, epochs, batch_size):
 
 if __name__ == '__main__':
     user_prepared_data = UserDataPreparation()
-    user_model = UserInfoNet(user_prepared_data.get_vec_len(), 100, 200, 1)
+    user_model = UserInfoNet(user_prepared_data.get_vec_len(), 100, 200, 2)
 
     vec_train_data = [[vec[0], vec[1]] for vec in user_prepared_data.user2vec_dict.values()]
     trainloader = torch.utils.data.DataLoader(vec_train_data, batch_size=3, shuffle=True)

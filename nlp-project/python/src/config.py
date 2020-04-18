@@ -1,6 +1,6 @@
-TRAIN_DATA_DIR = ""
+TRAIN_DATA_DIR = r"C:\Users\SPariente\Desktop\Work\Dev\Final Project\final_project\nlp-project\python\data"
 TRAIN_MAX_USERS = 1_000_000
-TRAIN_MAX_TWEETS_PER_USER = 1_000_000
+TRAIN_MAX_TWEETS_PER_USER = 1
 TRAIN_MAX_TWEETS = 30_000
 TRAIN_LSTM_DROPOUT = 0.5
 TEXT_HIDDEN_SIZE = 500
@@ -9,3 +9,4 @@ TEXT_EMBEDDING_SIZE = 200  # Should be the same as TEXT_EMBEDDING_PATH
 TEXT_EMBEDDING_PATH = "glove.twitter.27B.200d.txt"  # Use glove.twitter.27B.200d.txt from https://nlp.stanford.edu/projects/glove/
 TEXT_VOCAB_PATH = ""
 CUDA = False
+# USER_VECTOR_FEATURE =

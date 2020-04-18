@@ -28,6 +28,6 @@ class UserInfoNet(torch.nn.Module):
         """
 
         output_vector = self.out_vector(F.relu(self.linear_user(user_batch)))
-        output_user = self.linear_output(F.sigmoid(output_vector))
+        output_user = self.linear_output(torch.relu(output_vector))
         return output_user, output_vector  # Two values return - First value is classification of 0,1
         # Second value is the hidden size vector

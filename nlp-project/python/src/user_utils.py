@@ -1,8 +1,11 @@
 from typing import List, Optional
 from datetime import datetime
+import csv
 
 import tweepy
 from tweepy import User
+
+from python.src.data_utils import load_tweets_grouped_by_user
 
 consumer_key = ""
 consumer_secret = ""
@@ -62,3 +65,5 @@ def screen_name_to_vector(screen_name: str) -> List[int]:
     user = get_user(screen_name)
     vector = convert_user_to_vector(user)
     return vector
+
+
