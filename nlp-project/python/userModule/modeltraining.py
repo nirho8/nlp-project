@@ -38,9 +38,9 @@ def train_embeddings_network(model, users, epochs, batch_size):
 
             # print statistics
             running_loss += loss.item()
-            if (i + 1) % 1000 == 0:
+            if (i + 1) % 50 == 0:
                 print('[%d, %5d] loss: %.3f' %
-                      (epoch + 1, i + 1, running_loss / 1000))
+                      (epoch + 1, i + 1, running_loss / 50))
                 running_loss = 0.0
 
 
@@ -51,5 +51,5 @@ if __name__ == '__main__':
     vec_train_data = [[vec[0], vec[1]] for vec in user_prepared_data.user2vec_dict.values()]
     trainloader = torch.utils.data.DataLoader(vec_train_data, batch_size=3, shuffle=True)
 
-    train_embeddings_network(user_model, trainloader, 10, 3)
+    train_embeddings_network(user_model, trainloader, 100, 5)
     print("done")
