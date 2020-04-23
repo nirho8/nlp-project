@@ -17,7 +17,6 @@ class Tweets with ChangeNotifier {
   }
 
   Future<void> fetchAndSetTweets() async {
-    print(userId);
     final url =
         'https://flutter-app-bcd43.firebaseio.com/tweets.json?auth=$token&orderBy="creator"&equalTo="$userId"';
     try {
@@ -78,7 +77,7 @@ class Tweets with ChangeNotifier {
 
   Tweet deleteTweet(String id) {
     final url =
-        'https://flutter-app-bcd43.firebaseio.com/tweets/$id.json/auth=$token';
+        'https://flutter-app-bcd43.firebaseio.com/tweets/$id.json?auth=$token'; 
     final tweetIndex = _tweets.indexWhere((element) => element.id == id);
     var tweet = _tweets[tweetIndex];
     _tweets.removeAt(tweetIndex);
