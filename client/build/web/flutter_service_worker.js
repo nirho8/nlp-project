@@ -9,7 +9,7 @@ const RESOURCES = {
 "assets/assets/twitter.png": "26641c55c086348141249e56cdc606af",
 "assets/FontManifest.json": "ad85fc85e8e8bc657ed5a323213d68a7",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
-"assets/LICENSE": "35ae31dcd59a3c272adf16cc5b408afe",
+"assets/LICENSE": "f6e38776619299221a59274ef3b591fd",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "115e937bb829a890521f72d2e664b632",
 "assets/packages/eva_icons_flutter/lib/fonts/evaicons.ttf": "b600c99b39c9837f405131463e91f61a",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
@@ -17,7 +17,7 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "index.html": "434566624ae83b7d0add438f674bca92",
 "/": "434566624ae83b7d0add438f674bca92",
-"main.dart.js": "0f11a18eb88f205ae66b0ce2d6ea09a4",
+"main.dart.js": "8b2d3b726e6730cf18563ea35ca93204",
 "manifest.json": "f1829e609a87abd1495d68eda28bb5c9"
 };
 
