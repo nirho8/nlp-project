@@ -2,8 +2,8 @@ import torch
 from torch import nn
 import torch.utils.data
 
-from python.userModule.user_avg_label import UserDataPreparation
-from python.userModule.user_model import UserInfoNet
+from src.userModule.user_avg_label import UserDataPreparation
+from src.userModule.user_model import UserInfoNet
 
 
 def train_embeddings_network(model, users, epochs, batch_size):

@@ -2,8 +2,6 @@ import torch.utils.data
 import torch.nn.functional as F
 import torch.nn as nn
 
-from python.userModule.user_avg_label import UserDataPreparation
-
 
 class UserInfoNet(torch.nn.Module):
 
