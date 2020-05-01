@@ -45,3 +45,5 @@ app.*.map.json
 #pycharm
 nlp-project/python/data
 
+venv/
+

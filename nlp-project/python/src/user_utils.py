@@ -1,11 +1,11 @@
 from typing import List, Optional
 from datetime import datetime
-import csv
 
+import torch
 import tweepy
 from tweepy import User
 
-from python.src.data_utils import load_tweets_grouped_by_user
+from src.config import CUDA
 
 consumer_key = ""
 consumer_secret = ""
@@ -61,9 +61,14 @@ def convert_user_to_vector(user: User) -> List[int]:
            get_str(user, "profile_banner_url")
 
 
-def screen_name_to_vector(screen_name: str) -> List[int]:
+def convert_user_to_model_input(user: User) -> torch.Tensor:
+    user_vector = torch.tensor(convert_user_to_vector(user)).float()
+    if CUDA:
+        user_vector = user_vector.cuda()
+    return user_vector
+
+
+def screen_name_to_vector(screen_name: str) -> torch.Tensor:
     user = get_user(screen_name)
-    vector = convert_user_to_vector(user)
+    vector = convert_user_to_model_input(user)
     return vector
-
-

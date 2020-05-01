@@ -1,6 +1,6 @@
 import numpy as np
-from python.src.data_utils import load_tweets_grouped_by_user
-from python.src.user_utils import convert_user_to_vector
+from src.data_utils import load_tweets_grouped_by_user
+from src.user_utils import convert_user_to_vector
 
 
 class UserDataPreparation:

@@ -5,7 +5,7 @@ from typing import List
 
 from tweepy import Status
 
-from python.src.config import TRAIN_DATA_DIR, TRAIN_MAX_USERS, TRAIN_MAX_TWEETS_PER_USER, TRAIN_MAX_TWEETS
+from src.config import TRAIN_DATA_DIR, TRAIN_MAX_USERS, TRAIN_MAX_TWEETS_PER_USER, TRAIN_MAX_TWEETS
 
 
 def load_tweets_grouped_by_user(dir_path: str = TRAIN_DATA_DIR, max_users: int = TRAIN_MAX_USERS,
