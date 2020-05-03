@@ -4,7 +4,7 @@ import torch
 from sklearn.model_selection import train_test_split
 
 from src.config import TEXT_HIDDEN_SIZE, TEXT_OUT_SIZE, TRAIN_LSTM_DROPOUT, USER_HIDDEN_SIZE, USER_OUT_SIZE, \
-    USER_CLASS_OUT_SIZE, USER_VECTOR_SIZE, FINAL_LINEAR_SIZE, CUDA
+    USER_CLASS_OUT_SIZE, USER_VECTOR_SIZE, FINAL_LINEAR_SIZE, CUDA, TRAINED_MODEL_PATH
 from src.data_utils import load_tweets_grouped_by_user
 from src.text_model import TextModel, Vocab, sentence2tensor
 from src.userModule.user_model import UserInfoNet
@@ -112,3 +112,4 @@ def _main():
     if CUDA:
         model = model.cuda()
     _train(model, X_train, X_test, y_train, y_test)
+    torch.save(model.state_dict(), TRAINED_MODEL_PATH)

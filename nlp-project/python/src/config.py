@@ -1,5 +1,6 @@
 import os
 
+TRAINED_MODEL_PATH = "../../../model.pth"
 TRAIN_DATA_DIR = r"C:\Users\SPariente\Desktop\Work\Dev\Final Project\final_project\nlp-project\python\data"
 TRAIN_MAX_USERS = 1_000_000
 TRAIN_MAX_TWEETS_PER_USER = 1
