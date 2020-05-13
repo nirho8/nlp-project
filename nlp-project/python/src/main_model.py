@@ -225,7 +225,7 @@ def calc_test_loss(X_test, y_test, criterion, model) -> float:
 
 
 def train(model: torch.nn.Module, X_train, X_test, y_train, y_test, epochs=2000):
-    start_epoch = 0 if is_first_run() else load_epoch()
+    start_epoch = 0 if is_first_run() else load_epoch() + 1
     criterion = torch.nn.MSELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)  # , weight_decay=0.001)
     if not is_first_run():
