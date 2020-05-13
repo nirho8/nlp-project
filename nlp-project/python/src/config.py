@@ -1,7 +1,9 @@
 import os
 
+PRINT_AT_INDEX = 20  # After how many iteration should we print the loss?
+TRAIN_WORKING_DIR = ""  # TODO: Where to save training ouputs (e.g model)
 TRAINED_MODEL_PATH = "../../../model.pth"
-TRAIN_DATA_DIR = r"C:\Users\SPariente\Desktop\Work\Dev\Final Project\final_project\nlp-project\python\data"
+TRAIN_DATA_DIR = ""  # TODO: Where the tweets are saved
 TRAIN_MAX_USERS = 1_000_000
 TRAIN_MAX_TWEETS_PER_USER = 1
 TRAIN_MAX_TWEETS = 30_000
@@ -10,7 +12,7 @@ TEXT_HIDDEN_SIZE = 500
 TEXT_OUT_SIZE = 200
 TEXT_EMBEDDING_PATH = "glove.twitter.27B.200d.txt"  # Use glove.twitter.27B.200d.txt from https://nlp.stanford.edu/projects/glove/
 TEXT_EMBEDDING_SIZE = int(os.path.basename(TEXT_EMBEDDING_PATH).split(".")[-2].replace("d", ""))  # Should be the same as TEXT_EMBEDDING_PATH (200)
-TEXT_VOCAB_PATH = ""
+TEXT_VOCAB_PATH = os.path.join(TRAIN_WORKING_DIR, "vocab.pickle")
 CUDA = False
 USER_VECTOR_SIZE = 22
 USER_HIDDEN_SIZE = 100
