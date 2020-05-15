@@ -13,6 +13,7 @@ def load_tweets_grouped_by_user(dir_path: str = TRAIN_DATA_DIR, max_users: int =
                                 max_tweets: int = TRAIN_MAX_TWEETS) -> List[List[Status]]:
     tweets = []
     for user_file_path in glob(os.path.join(dir_path, "*.pickle"))[:max_users]:
+        print(len(tweets), " - ", sum([len(t) for t in tweets]))
         with open(user_file_path, "rb") as f:
             tweets.append(pickle.load(f)[:max_tweets_per_user])
         if sum([len(t) for t in tweets]) >= max_tweets:
