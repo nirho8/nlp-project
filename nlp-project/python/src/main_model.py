@@ -120,7 +120,7 @@ def _main():
 
 def load_model(model: PredictLikesModel) -> PredictLikesModel:
     path = os.path.join(TRAIN_WORKING_DIR, "model")
-    model.load_state_dict(torch.load(path))
+    model.load_state_dict(torch.load(path, map_location=torch.device("cpu")))
     return model
 
 
@@ -136,7 +136,10 @@ def save_optimizer(optimizer) -> None:
 
 def load_optimizer(optimizer):
     path = os.path.join(TRAIN_WORKING_DIR, "optimizer")
-    optimizer.load_state_dict(torch.load(path))
+    if not CUDA:
+        optimizer.load_state_dict(torch.load(path, map_location=torch.device("cpu")))
+    if CUDA:
+        optimizer.load_state_dict(torch.load(path, map_location=torch.device("cuda:0")))
     return optimizer
 
 
@@ -170,11 +173,15 @@ def load_epoch() -> int:
 
 def save_train_test_data(X_train: torch.Tensor, X_test: torch.tensor, y_train: torch.Tensor,
                          y_test: torch.Tensor) -> None:
-    _save_pickle((X_train, X_test, y_train, y_test), "train_test.pickle")
+    path = os.path.join(TRAIN_WORKING_DIR, "train_test.pickle")
+    torch.save((X_train, X_test, y_train, y_test), path)
 
 
 def load_train_test_data() -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
-    return _load_pickle("train_test.pickle")
+    path = os.path.join(TRAIN_WORKING_DIR, "train_test.pickle")
+    if CUDA:
+        return torch.load(path, map_location=torch.device("cuda:0"))
+    return torch.load(path, map_location=torch.device("cpu"))
 
 
 def save_embeddings(embeddings: List[List[float]]) -> None:
@@ -268,9 +275,14 @@ def train(model: torch.nn.Module, X_train, X_test, y_train, y_test, epochs=2000)
 def main():
     if is_first_run():
         print("No existing model, creating new")
+        print("Loading tweets")
         tweets_objects = sum(load_tweets_grouped_by_user(), [])
+        print("Done loading tweets")
+        print("Creating new vocab")
         vocab = Vocab.create_new([t.full_text for t in tweets_objects])
+        print("Saving vocab")
         vocab.save_to_file()
+        print("Vocab saved")
 
         num_words = vocab.get_num_words()
         embeddings = vocab.get_embeddings()
