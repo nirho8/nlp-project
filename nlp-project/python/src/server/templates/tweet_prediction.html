@@ -1,0 +1,59 @@
+
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action=""> <! –– we leave the action empty cos when we post the form we want to send the informaion the the same route ––>
+            {{ tweet_details.hidden_tag() }} <! –– we add to help agants attacks like the SECRET_KEY ––>
+            <fieldset class="form-group">
+                <legend class="border-bottem mb-4">Join Today</legend>
+                <div class="form-group">
+                    {{tweet_details.account_name.label(class="form-control-label") }}
+                        {% if tweet_details.account_name.errors %}
+                            {{tweet_details.account_name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in tweet_details.account_name.errors %}
+                                <span>{{ error }}</span>>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{tweet_details.account_name(class="form-control form-control-lg") }}
+                        {% endif %}
+                </div>
+                <div class="form-group">
+                    {{tweet_details.tweet.label(class="form-control-label") }}
+                    {% if tweet_details.tweet.errors %}
+                            {{tweet_details.tweet(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in tweet_details.tweet.errors %}
+                                <span>{{ error }}</span>>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{tweet_details.tweet(class="form-control form-control-lg") }}
+                        {% endif %}
+                </div>
+                <div class="form-group">
+                    {{tweet_details.time.label(class="form-control-label") }}
+                    {% if tweet_details.time.errors %}
+                            {{tweet_details.time(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in time.confirm_password.errors %}
+                                <span>{{ error }}</span>>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{tweet_details.time(class="form-control form-control-lg") }}
+                        {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ tweet_details.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+        <div class="border-top pt-3">
+                <small class="text-muted">
+                    Already have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+                </small>
+        </div>
+    </div>
+{% endblock content %}

@@ -4,6 +4,7 @@ from typing import List, Any, Tuple
 
 import torch
 from sklearn.model_selection import train_test_split
+from tweepy import User
 
 from src.config import TEXT_HIDDEN_SIZE, TEXT_OUT_SIZE, TRAIN_LSTM_DROPOUT, USER_HIDDEN_SIZE, USER_OUT_SIZE, \
     USER_CLASS_OUT_SIZE, USER_VECTOR_SIZE, FINAL_LINEAR_SIZE, CUDA, TRAINED_MODEL_PATH, TRAIN_WORKING_DIR, \
@@ -314,3 +315,26 @@ def main():
         model = model.cuda()
 
     train(model, X_train, X_test, y_train, y_test)
+
+
+def predict_load_model() -> PredictLikesModel:
+    print("Loading model")
+    model = PredictLikesModel(load_num_words(), load_embeddings())
+    model = load_model(model).eval()
+    print("Done loading model")
+    return model
+
+
+def predict_load_vocab() -> Vocab:
+    print("Loading vocab")
+    vocab = Vocab.load_from_file()
+    print("Done loading vocab")
+    return vocab
+
+
+def predict(model: PredictLikesModel, vocab: Vocab, text: str, user: User) -> int:
+    user_vector = convert_user_to_model_input(user)
+    text_vector = sentence2tensor(vocab, text)
+    x = [user_vector, text_vector]
+    output = model(x)
+    return max(int(output.tolist()[0]), 0)
