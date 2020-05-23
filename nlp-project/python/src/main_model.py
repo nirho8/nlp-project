@@ -8,7 +8,7 @@ from tweepy import User
 
 from src.config import TEXT_HIDDEN_SIZE, TEXT_OUT_SIZE, TRAIN_LSTM_DROPOUT, USER_HIDDEN_SIZE, USER_OUT_SIZE, \
     USER_CLASS_OUT_SIZE, USER_VECTOR_SIZE, FINAL_LINEAR_SIZE, CUDA, TRAINED_MODEL_PATH, TRAIN_WORKING_DIR, \
-    PRINT_AT_INDEX
+    PRINT_AT_INDEX, PRINT_TEST_AT_TRAIN_ITER
 from src.data_utils import load_tweets_grouped_by_user
 from src.text_model import TextModel, Vocab, sentence2tensor
 from src.userModule.user_model import UserInfoNet
@@ -220,15 +220,20 @@ def is_first_run() -> bool:
 def calc_test_loss(X_test, y_test, criterion, model) -> float:
     loss_sum = 0
     model = model.eval()
+    values = set()
     for i, x in enumerate(X_test):
         y = y_test[i]
         output = model(x)
-        output = output
+        values.add(output.tolist()[0])
         loss = criterion(output, y)
         loss_sum += loss.item()
     model.train()
     test_loss = loss_sum / len(X_test)
     print("test data loss:", test_loss)
+
+    if len(values) < 10:  # The model always returns the same value.
+        print("test runs values:", values)
+
     return test_loss
 
 
@@ -240,6 +245,7 @@ def train(model: torch.nn.Module, X_train, X_test, y_train, y_test, epochs=2000)
         optimizer = load_optimizer(optimizer)
 
     print_counter = 0
+    print_test_counter = 0
     loss_sum = 0
     print_at_index = PRINT_AT_INDEX
 
@@ -262,7 +268,10 @@ def train(model: torch.nn.Module, X_train, X_test, y_train, y_test, epochs=2000)
                 avg_loss = loss_sum / print_at_index
                 train_losses_avg.append(avg_loss)
                 print(avg_loss)
-                test_losses_avg.append(calc_test_loss(X_test, y_test, criterion, model))
+                print_test_counter += 1
+                if print_test_counter >= PRINT_TEST_AT_TRAIN_ITER:
+                    test_losses_avg.append(calc_test_loss(X_test, y_test, criterion, model))
+                    print_test_counter = 0
                 print_counter = 0
                 loss_sum = 0
 

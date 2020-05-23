@@ -2,6 +2,7 @@ import os
 
 FLASK_TEMPLATE_FOLDER = ""  # TODO
 PRINT_AT_INDEX = 100  # After how many iteration should we print the loss?
+PRINT_TEST_AT_TRAIN_ITER = 20
 TRAIN_WORKING_DIR = ""  # TODO: Where to save training ouputs (e.g model)
 TRAINED_MODEL_PATH = "../../../model.pth"
 TRAIN_DATA_DIR = ""  # TODO: Where the tweets are saved
