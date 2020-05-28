@@ -135,8 +135,8 @@ class SignUpScreen extends StatelessWidget {
 
                         //InputField Widget from the widgets folder
                         InputField(
-                          label: "Username",
-                          content: "a_khanooo",
+                          label: "Username with @",
+                          content: "@userName",
                           onSave: (value) {
                             _user.userName = value;
                           },

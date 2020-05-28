@@ -30,14 +30,14 @@ class _TweetScreenState extends State<TweetScreen> {
     date: DateFormat.yMMMd().format(new DateTime.now()),
   );
 
-  void _saveForm() {
+  void _saveForm(String userName) {
     final isValid = _form.currentState.validate();
     if (!isValid) {
       return;
     }
     _form.currentState.save();
     setState(() => isLoading = true);
-    Provider.of<Tweets>(context, listen: false).addTweet(_tweet).then((_) {
+    Provider.of<Tweets>(context, listen: false).addTweet(_tweet, userName, true).then((_) {
       setState(() => isLoading = false);
     }).catchError((onError) {
       print(onError);
@@ -133,7 +133,7 @@ class _TweetScreenState extends State<TweetScreen> {
                         Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: RaisedButton(
-                              onPressed: _saveForm,
+                              onPressed:()=> _saveForm(userProvider.loggedUser.userName),
                               child: Text(
                                 'Tweet it',
                                 style: TextStyle(

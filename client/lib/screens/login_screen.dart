@@ -180,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         //InputField Widget from the widgets folder
                         InputField(
                           label: "Email",
-                          content: "a_khanooo@some.com",
+                          content: "email@some.com",
                           onSave: (value) {
                             _user.email = value;
                           },

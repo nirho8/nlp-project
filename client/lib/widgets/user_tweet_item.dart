@@ -42,7 +42,7 @@ class UserTweetItem extends StatelessWidget {
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text('Tweet deleted'),
                       action: SnackBarAction(label: 'Undo', onPressed: () {
-                        tweetProvider.addTweet(deletedTweet);
+                        tweetProvider.addTweet(deletedTweet,null,false);
                       }),
                     ));
                   },
