@@ -4,7 +4,6 @@ import 'package:final_project/providers/tweets.dart';
 import 'package:final_project/providers/users.dart';
 import 'package:final_project/screens/edit_profile_screen.dart';
 import 'package:final_project/screens/login_screen.dart';
-import 'package:final_project/screens/signup_screen.dart';
 import 'package:final_project/widgets/drawer.dart';
 import 'package:final_project/widgets/user_name_bar.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +18,10 @@ class TweetScreen extends StatefulWidget {
 
 class _TweetScreenState extends State<TweetScreen> {
   final _form = GlobalKey<FormState>();
-  bool isLike = true;
+  bool isLike = false;
   var isLoading = false;
   var saveTheForm = false;
+  String likes;
 
   var _tweet = Tweet(
     id: null,
@@ -37,8 +37,8 @@ class _TweetScreenState extends State<TweetScreen> {
     }
     _form.currentState.save();
     setState(() => isLoading = true);
-    Provider.of<Tweets>(context, listen: false).addTweet(_tweet, userName, true).then((_) {
-      setState(() => isLoading = false);
+    Provider.of<Tweets>(context, listen: false).addTweet(_tweet, userName, true).then((like) {
+      setState(() => {isLoading = false, isLike = true, likes = like});
     }).catchError((onError) {
       print(onError);
     });
@@ -162,7 +162,7 @@ class _TweetScreenState extends State<TweetScreen> {
                                         padding: EdgeInsets.only(
                                             top: 6.0, bottom: 6.0),
                                         child: Text(
-                                          "You're expected like is",
+                                          "You're expected like: $likes",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 15.0,

@@ -1,7 +1,7 @@
 'use strict';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "404.html": "0a27a4163254fc8fce870c8cc3a3f94f",
+  "404.html": "a4e2271d19eb1f6f93a15e1b7a4e74dd",
 "assets/AssetManifest.json": "fd934c9c800e76553404f95f7e22050e",
 "assets/assets/twitter-custom-logo.png": "14bf209caa968dfdb8a1c90b6707c966",
 "assets/assets/twitter-logo.jpg": "bd3cc8ccfbfeee4c409740bd681770ee",
@@ -17,7 +17,7 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "index.html": "434566624ae83b7d0add438f674bca92",
 "/": "434566624ae83b7d0add438f674bca92",
-"main.dart.js": "8b2d3b726e6730cf18563ea35ca93204",
+"main.dart.js": "4f8b0c4a59561028354916104e8502a2",
 "manifest.json": "f1829e609a87abd1495d68eda28bb5c9"
 };
 

@@ -43,7 +43,7 @@ class _UserTweetsScreenState extends State<UserTweetsScreen> {
         title: GestureDetector(
           onTap: () => {Navigator.of(context).pushReplacementNamed('/')},
           child: Text(
-            'You\'r Tweets',
+            'Your Tweets',
             style: TextStyle(
                 height: 500,
                 fontSize: 28,

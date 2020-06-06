@@ -38,7 +38,7 @@ class Tweets with ChangeNotifier {
     }
   }
 
-  Future<void> addTweet(Tweet tweet, String userName, bool toPredict) async {
+  Future<String> addTweet(Tweet tweet, String userName, bool toPredict) async {
     print(userName);
     var likes;
     if (toPredict) {
@@ -77,6 +77,7 @@ class Tweets with ChangeNotifier {
 
       _tweets.add(newTweet);
       notifyListeners();
+      return likes;
     });
   }
 
