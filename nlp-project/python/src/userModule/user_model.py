@@ -7,13 +7,11 @@ class UserInfoNet(torch.nn.Module):
 
     def __init__(self, user_vector_size, hidden_size, user_vector_out, output_size):
         """
-          players_n - the size of the one hot vectors representing a single player
           hidden_size - the output size of Linear of winner, Linear of loser and Linear 1 from the diagram (200 for now)
           Note - Linear 2's output size should be 2
         """
         super(UserInfoNet, self).__init__()
 
-        self.players_n = user_vector_size
         self.hidden_size = hidden_size
 
         self.linear_user = nn.Linear(user_vector_size, hidden_size)
